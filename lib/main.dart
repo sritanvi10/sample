@@ -29,13 +29,14 @@ class AppState extends ChangeNotifier{
 Container Grid(String text) {
   return Container(
     color: const Color.fromARGB(255, 250, 250, 250),
-    padding: EdgeInsets.all(8),
+    padding: EdgeInsets.all(10),
     child: Text(
       text, 
       textAlign: TextAlign.center,
       style: TextStyle(
         color: Colors.black,
-        fontSize: 50,
+        fontSize: 25,
+        decoration: TextDecoration.none,
       ),
     ),
   );
@@ -45,25 +46,19 @@ class HomePage extends StatelessWidget{
 
   Widget build(BuildContext context){
     var appstate=context.watch<AppState>();
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Expanded(
-          flex: 3,
-          child:GridView.count(
-            crossAxisCount: 4,
-            padding: EdgeInsets.all(15),
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            children: [
-              Grid('1'),
-              Grid('2'),
-              Grid('3'),
-              Grid('4'),
-              Grid('5'),
-              Grid('6'),
-            ],
+        SizedBox(
+          height: 400,
+          width: 400 ,
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 6), 
+              itemCount: 50,
+              itemBuilder: (context, index) => Container(padding: EdgeInsets.all(6),child: Grid('${index+1}'))
+            )
           ),
-        ),
       ],
     );
   }
